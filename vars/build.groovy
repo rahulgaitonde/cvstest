@@ -8,7 +8,7 @@ def build(dockerImageName)
 
 def run(dockerImageName)
 {
-    sh "docker run -dit --name catalina -p 8083:8080 ${dockerImageName}"
+    sh "docker run -dit --name javamaven -p 8083:8080 ${dockerImageName}"
     sh "docker ps"
     sh "docker cp javamaven:/usr/local/tomcat/webapps/wizard.war /tmp"
 }
