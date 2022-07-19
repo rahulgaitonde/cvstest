@@ -8,16 +8,8 @@ def build(dockerImageName)
 
 def run(dockerImageName)
 {
-    sh "docker run -dit ${dockerImageName}"
-    sh "docker ps -a"
+    sh "docker run -t --name javamaven -d ${dockerImageName}"
+    sh "docker ps"
+    sh "docker cp javamaven:/usr/local/tomcat/webapps/wizard.war /tmp"
 }
 
-
-def dockerPush()
-    {
-        sh "eval `aws ecr get-login | sed 's/-e none//g'`"
-        echo "Pushing images to docker repo"
-        sh "docker push ${dockerImageName}"
-        echo "Pushed to ${dockerImageName}"
-        sh "docker rmi ${dockerImageName}"
-    }
